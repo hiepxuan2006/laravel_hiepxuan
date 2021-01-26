@@ -19,6 +19,6 @@ class UserNew extends Model
         'role',
     ];
     protected $hidden = [
-        'password'
+       // 'password'
     ];
 }

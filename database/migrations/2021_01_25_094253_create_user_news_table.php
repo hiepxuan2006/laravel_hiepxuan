@@ -14,11 +14,11 @@ class CreateUserNewsTable extends Migration
     public function up()
     {
         Schema::create('user_news', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->bigIncrements('id');
             $table->string('image',255);
             $table->string('username',30);
-            $table->string('passsword',255);
-            $table->string('fullname',255);
+            $table->string('password',255);
+            $table->string('full_name',255);
             $table->string('email',255);
             $table->tinyInteger('role');
             $table->softDeletes();
