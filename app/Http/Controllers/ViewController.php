@@ -87,6 +87,8 @@ class ViewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $users=UserNew::find($id);
+        $users->delete();
+        return redirect()->action('App\Http\Controllers\ViewController@index');
     }
 }

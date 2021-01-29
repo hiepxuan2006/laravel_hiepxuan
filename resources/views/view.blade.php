@@ -32,10 +32,17 @@
                 <td>{{$user->full_name}}</td>
                 <td>{{$user->email}}</td>
                 <th>
-                    <a href="view/{{$user->id}}/edit" class="btn btnedit">Edit</a>
+                    <form method="POST" action="view/{{$user->id}}/edit" >
+                        @method('get')
+                        <button type="submit">Edit</button>
+                    </form>
                 </th>
                 <th>
-                    <a href="view/delete/{{$user->id}}" class="btn btndelete">Delete</a>
+                    <form method="POST" action="view/{{$user->id}}/delete" >
+                        @method('delete')
+                        @csrf
+                        <button type="submit">Delete</button>
+                    </form>
                 </th>
             </tr>
         @endforeach

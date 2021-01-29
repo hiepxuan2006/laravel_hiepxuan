@@ -34,5 +34,6 @@ class CreateUserNewsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('user_news');
+
     }
 }

@@ -21,5 +21,5 @@ Route::post('/store','App\Http\Controllers\UserCotroller@store');
 Route::get('/view','App\Http\Controllers\ViewController@index');
 Route::get('/view/{id}/edit','App\Http\Controllers\ViewController@edit');
 Route::post('/view/{id}/update','App\Http\Controllers\ViewController@update');
-//Route::get('/view/delete/{id}','App\Http\Controllers\ViewController@delete');
+Route::delete('/view/{id}/delete','App\Http\Controllers\ViewController@destroy');
 
