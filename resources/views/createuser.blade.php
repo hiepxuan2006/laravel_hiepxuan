@@ -8,7 +8,7 @@
     <title>Thêm user mới</title>
 </head>
 <body>
-<form class="formuser" method="post" action="{{route('user.store')}}" >
+<form class="formuser" method="post" action="store" >
     @csrf
     <p>
         <label for="username">Username</label><br>
@@ -27,7 +27,7 @@
         <input class="formuser1" type="text" name="email" value="">
     </p>
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">Submit</button>
     </p>
 </form>
 </body>
