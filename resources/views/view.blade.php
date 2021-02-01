@@ -5,12 +5,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>hiển thị danh sách user</title>
+    <title>Hiển thị danh sách user</title>
 </head>
 <body>
 <div class="view">
     <table class="viewtable" border="1" cellspacing="0">
-        <h3>danh sách user</h3>
+        <h3>Danh sách user</h3>
         <thead>
         <tr>
             <th>ID</th>
@@ -19,7 +19,7 @@
             <th>Password</th>
             <th>Full_name</th>
             <th>Email</th>
-            <th colspan="2"></th>
+            <th colspan="3">...</th>
         </tr>
         </thead>
         <tbody>
@@ -32,16 +32,21 @@
                 <td>{{$user->full_name}}</td>
                 <td>{{$user->email}}</td>
                 <th>
-                    <form method="POST" action="view/{{$user->id}}/edit" >
-                        @method('get')
+                    <form method="GET" action="{{route('user.edit',['id'=>$user->id])}}">
                         <button type="submit">Edit</button>
                     </form>
                 </th>
                 <th>
-                    <form method="POST" action="view/{{$user->id}}/delete" >
+                    <form method="POST" action="{{route('user.delete',['id'=>$user->id])}}">
                         @method('delete')
                         @csrf
                         <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    <form method="get" action="{{route('user.create')}}">
+                        @csrf
+                        <button type="submit">Add</button>
                     </form>
                 </th>
             </tr>

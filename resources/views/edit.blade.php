@@ -8,7 +8,7 @@
     <title>CHỉnh sửa thông tin</title>
 </head>
 <body>
-<form class="formuser" method="post" action="/view/{{$users->id}}/update" >
+<form class="formuser" method="post" action="{{route('user.update',['id'=>$users->id])}}">
     @csrf
     <p>
         <label for="username">Username</label><br>
