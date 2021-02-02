@@ -10,7 +10,7 @@
 <body>
 <div>
 
-    <form class="formuser" method="post" action="{{route('user.update',['id'=>$users->id])}}">
+    <form class="formuser" method="post" action="{{route('users.update',['id'=>$users->id])}}">
         @csrf
         <p>
             <label for="username">Username</label><br>

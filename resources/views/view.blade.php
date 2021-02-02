@@ -32,20 +32,20 @@
                 <td>{{$user->full_name}}</td>
                 <td>{{$user->email}}</td>
                 <th>
-                    <form method="GET" action="{{route('user.edit',['id'=>$user->id])}}">
+                    <form method="GET" action="{{route('users.edit',['id'=>$user->id])}}">
                         @method('get')
                         <button type="submit">Edit</button>
                     </form>
                 </th>
                 <th>
-                    <form method="POST" action="{{route('user.delete',['id'=>$user->id])}}">
+                    <form method="POST" action="{{route('users.delete',['id'=>$user->id])}}">
                         @method('delete')
                         @csrf
                         <button type="submit">Delete</button>
                     </form>
                 </th>
                 <th>
-                    <form method="get" action="{{route('user.create')}}">
+                    <form method="get" action="{{route('users.create')}}">
                         @csrf
                         <button type="submit">Add</button>
                     </form>
