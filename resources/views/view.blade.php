@@ -19,23 +19,37 @@
             <th>Password</th>
             <th>Full_name</th>
             <th>Email</th>
-            <th colspan="2"></th>
+            <th colspan="3"></th>
         </tr>
         </thead>
         <tbody>
         @foreach($users as $user)
             <tr>
-                <th scope="row">{{$user->id}}</th>
+                <th>{{$user->id}}</th>
                 <td>{{$user->image}}</td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->password}}</td>
                 <td>{{$user->full_name}}</td>
                 <td>{{$user->email}}</td>
                 <th>
-                    <a href="view/{{$user->id}}/edit" class="btn btnedit">Edit</a>
+                    <form method="GET" action="{{route('user.edit',['id'=>$user->id])}}">
+                        @method('get')
+                        <button type="submit">Edit</button>
+                    </form>
                 </th>
                 <th>
-                    <a href="view/delete/{{$user->id}}" class="btn btndelete">Delete</a>
+                    <form method="POST" action="{{route('user.delete',['id'=>$user->id])}}">
+                        @method('delete')
+                        @csrf
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+                <th>
+                    <form method="get" action="{{route('user.create')}}">
+                        @csrf
+                        <button type="submit">Add</button>
+                    </form>
+                </th>
                 </th>
             </tr>
         @endforeach

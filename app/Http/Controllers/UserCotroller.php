@@ -2,91 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserNew;
+use App\Models\User;
 use Illuminate\Http\Request;
+
 class UserCotroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('view', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   function create()
     {
        return view('createuser');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $usernew = new UserNew();
+        $request->validate([
+           'username'=>'required',
+           'password'=>'required|min:8|max:255',
+           'full_name'=>'required',
+           'email'=>'required|email',
+        ]);
+        $data = request()->all();
+        $usernew = new User();
         $usernew->image='123';
-        $usernew->username = $request->input('username');
-        $usernew->password = $request->input('password');
-        $usernew->full_name = $request->input('full_name');;
-        $usernew->email = $request->input('email');;
+        $usernew->username = $data['username'];
+        $usernew->password = $data['password'];
+        $usernew->full_name = $data['full_name'];
+        $usernew->email = $data['email'];
         $usernew->role='123';
         $usernew->save();
-        return redirect()->action('App\Http\Controllers\ViewController@index');
+
+        return redirect()->route('user.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $users = User::find($id);
+
+        return view('edit', compact('users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $request->validate([
+            'username'=>'required',
+            'password'=>'required|min:8|max:255',
+            'full_name'=>'required',
+            'email'=>'required|email',
+        ]);
+            $data = request()->all();
+            $users = User::find($id);
+            $users->username = $data['username'];
+            $users->password = $data['password'];
+            $users->full_name = $data['full_name'];
+            $users->email = $data['email'];
+            $users->save();
+            return redirect()->route('user.index');
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $users = User::find($id);
+        $users->delete();
+
+        return redirect()->route('user.index');
     }
 }
