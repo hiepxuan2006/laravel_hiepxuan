@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
+use SebastianBergmann\Diff\Exception;
 
 class UserCotroller extends Controller
 {
@@ -26,7 +28,7 @@ class UserCotroller extends Controller
             'password' => 'required|min:8|max:255',
             'password_confirmation' => 'required_with:password|same:password',
             'full_name' => 'required',
-            'email' => 'required|email|regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',
+            'email' => 'required|email:rfc,dns',
         ]);
         try {
             $data = request()->all();
@@ -38,7 +40,7 @@ class UserCotroller extends Controller
             $usernew->email = $data['email'];
             $usernew->role = '123';
             $usernew->save();
-        } catch (RequestException $ex) {
+        }catch (Exception $exception){
             abort(404, 'not found');
         }
 
@@ -52,7 +54,7 @@ class UserCotroller extends Controller
 
     public function edit($id)
     {
-        $users = User::findOrFail($id);
+        $users = User::find($id);
 
         return view('edit', compact('users'));
     }
@@ -63,17 +65,17 @@ class UserCotroller extends Controller
             'username' => 'required',
             'password' => 'required|min:8|max:255',
             'full_name' => 'required',
-            'email' => 'required|email|regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',
+            'email' => 'required|email:rfc,dns'
         ]);
         try {
             $data = request()->all();
-            $users = User::findOrFail($id);
+            $users = User::find($id);
             $users->username = $data['username'];
             $users->password = $data['password'];
             $users->full_name = $data['full_name'];
             $users->email = $data['email'];
             $users->save();
-        } catch (RequestException $ex) {
+        }catch (Exception $exception){
             abort(404, 'not found');
         }
 
@@ -82,8 +84,8 @@ class UserCotroller extends Controller
 
     public function destroy($id)
     {
-        $users = User::findOrFail($id);
-        $users->delete();
+            $users = User::find($id);
+            $users->delete();
 
         return redirect()->route('users.index');
     }
