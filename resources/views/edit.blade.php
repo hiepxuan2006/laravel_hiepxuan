@@ -8,27 +8,35 @@
     <title>CHỉnh sửa thông tin</title>
 </head>
 <body>
-<form class="formuser" method="post" action="/view/{{$users->id}}/update" >
-    @csrf
-    <p>
-        <label for="username">Username</label><br>
-        <input type="text" name="username" value="{{ $users->username }}">
-    </p>
-    <p>
-        <label for="password">Password</label><br>
-        <input type="text" name="password" value="{{ $users->password }}">
-    </p>
-    <p>
-        <label for="fullname">Full name</label><br>
-        <input type="text" name="full_name" value="{{ $users->full_name }}">
-    </p>
-    <p>
-        <label for="email">Email</label><br>
-        <input type="text" name="email" value="{{ $users->email }}">
-    </p>
-    <p>
-        <button type="submit" class="btn btnupdate">Update</button>
-    </p>
-</form>
+<div>
+
+    <form class="formuser" method="post" action="{{route('users.update',['id'=>$users->id])}}">
+        @csrf
+        <p>
+            <label for="username">Username</label><br>
+            <input type="text" name="username" value="{{ $users->username }}">
+        </p>
+        <p>
+            <label for="password">Password</label><br>
+            <input type="text" name="password" value="{{ $users->password }}">
+        </p>
+        <p>
+            <label for="fullname">Full name</label><br>
+            <input type="text" name="full_name" value="{{ $users->full_name }}">
+        </p>
+        <p>
+            <label for="email">Email</label><br>
+            <input type="text" name="email" value="{{ $users->email }}">
+        </p>
+        <p>
+            <button type="submit" class="btn btnupdate">Update</button>
+        </p>
+    </form>
+    <ul class="alert text-danger">
+        @foreach( $errors ->all() as $error)
+            <li >{{$error}}</li>
+        @endforeach
+    </ul>
+</div>
 </body>
 </html>

@@ -16,10 +16,12 @@ use App\Http\Controllers\UserCotroller;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/createuser','App\Http\Controllers\UserCotroller@create');
-Route::post('/store','App\Http\Controllers\UserCotroller@store');
-Route::get('/view','App\Http\Controllers\ViewController@index');
-Route::get('/view/{id}/edit','App\Http\Controllers\ViewController@edit');
-Route::post('/view/{id}/update','App\Http\Controllers\ViewController@update');
-//Route::get('/view/delete/{id}','App\Http\Controllers\ViewController@delete');
 
+Route::group(['prefix'=>'users'],function (){
+    Route::get('/',[UserCotroller::class,'index'])->name('users.index');
+    Route::get('/createuser',[UserCotroller::class,'create'])->name('users.create');
+    Route::post('/store',[UserCotroller::class,'store'])->name('users.store');
+    Route::get('/edit/{id}',[UserCotroller::class,'edit'])->name('users.edit');
+    Route::post('/update/{id}',[UserCotroller::class,'update'])->name('users.update');
+    Route::delete('/delete/{id}',[UserCotroller::class,'destroy'])->name('users.delete');
+});
