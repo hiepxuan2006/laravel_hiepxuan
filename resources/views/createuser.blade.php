@@ -1,4 +1,3 @@
-@extends('layouts.app')
     <!doctype html>
 <html lang="en">
 <head>
@@ -24,17 +23,23 @@
             <label for="password_confirmation">Password confirm</label><br>
             <input class="formuser1" type="password" name="password_confirmation" placeholder="nhập lại password" value="">
         </div>
-        <p>
-            <label for="full_name">Fullname</label><br>
-            <input class="formuser1" type="text" name="full_name" placeholder="Username 1" value="">
-        </p>
-        <p>
-            <label for="email">Email</label><br>
-            <input class="formuser1" type="text" name="email" placeholder="user1@gmail.com" value="">
-        </p>
-        <p>
-            <button type="submit">Submit</button>
-        </p>
+      <div>
+          <p>
+              <label for="full_name">Fullname</label><br>
+              <input class="formuser1" type="text" name="full_name" placeholder="Username 1" value="">
+          </p>
+      </div>
+       <div>
+           <p>
+               <label for="email">Email</label><br>
+               <input class="formuser1" type="text" name="email" placeholder="user1@gmail.com" value="">
+           </p>
+       </div>
+       <div>
+           <p>
+               <button type="submit">Submit</button>
+           </p>
+       </div>
     </form>
     <ul class="alert text-danger" style="list-style: none;color: red ">
         @foreach( $errors ->all() as $error)
