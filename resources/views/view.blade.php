@@ -10,8 +10,11 @@
 <body>
 <div class="view">
     <table class="viewtable" border="1" cellspacing="0">
-        <h3>danh sách user</h3>
+        <h1>Danh Sách User</h1>
         <thead>
+        <a href="{{route('home')}}" style="text-decoration: none">
+            <h3>Trang home</h3>
+        </a>
         <tr>
             <th>ID</th>
             <th>Image</th>
